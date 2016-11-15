@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115061126) do
+ActiveRecord::Schema.define(version: 20161115171449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,23 +26,20 @@ ActiveRecord::Schema.define(version: 20161115061126) do
     t.index ["venue_id"], name: "index_events_on_venue_id", using: :btree
   end
 
-  create_table "rsvps", force: :cascade do |t|
+  create_table "interests", force: :cascade do |t|
     t.boolean  "rsvp"
     t.integer  "user_id"
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_rsvps_on_event_id", using: :btree
-    t.index ["user_id"], name: "index_rsvps_on_user_id", using: :btree
+    t.index ["event_id"], name: "index_interests_on_event_id", using: :btree
+    t.index ["user_id"], name: "index_interests_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "last_name"
     t.string   "username"
-    t.string   "password"
-    t.string   "email"
     t.string   "password_digest"
+    t.string   "email"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -58,6 +55,6 @@ ActiveRecord::Schema.define(version: 20161115061126) do
   end
 
   add_foreign_key "events", "venues"
-  add_foreign_key "rsvps", "events"
-  add_foreign_key "rsvps", "users"
+  add_foreign_key "interests", "events"
+  add_foreign_key "interests", "users"
 end
