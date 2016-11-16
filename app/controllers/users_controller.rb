@@ -32,6 +32,15 @@ class UsersController < ApplicationController
     render json: User.find(params[:id])
   end
 
+  def update
+    user = User.find(params[:id])
+    if user.update(user_params)
+      render json: {status: 200, user: user}
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     User.destroy(params[:id])
 
