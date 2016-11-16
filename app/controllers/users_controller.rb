@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate, except: [:login, :create]
 
+  def index
+    users = User.all
+    render json: users
+  end
+
+  #POST/users
   def create
     user = User.new(user_params)
 
@@ -36,6 +42,7 @@ class UsersController < ApplicationController
 
   def token(id, username)
     # binding.pry
+    puts payload(id, username)
     JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
   end
 
