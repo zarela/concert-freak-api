@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
   before_action :authenticate, except: [:login, :create]
+  # before_action :set_profile
 
   def index
     users = User.all
     render json: users
+  end
+
+  def set_profile
+    @user = User.find(params[:id])
   end
 
   #POST/users
@@ -11,7 +16,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      render json: {status: 200, message: "ok"}
+      render json: {status: 200, message: "Registration Successful"}
     else
       render json: {status: 422, user: user, errors: user.errors }
     end
@@ -24,7 +29,7 @@ class UsersController < ApplicationController
       token = token(user.id, user.username) # Added this
       render json: {status: 201, user: user, token: token}
     else
-      render json: {status: 401, message: "unauthorized"}
+      render json: {status: 401, message: "Unauthorized"}
     end
   end
 
@@ -49,23 +54,22 @@ class UsersController < ApplicationController
 
   private
 
-  def token(id, username)
-    # binding.pry
-    puts payload(id, username)
-    JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
-  end
+    def token(id, username)
+      puts payload(id, username)
+      JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
+    end
 
-  def payload(id, username)
-    {
-      exp: (Time.now + 1.day).to_i, # Expiration date 24 hours from now
-      iat: Time.now.to_i,
-      iss: ENV['JWT_ISSUER'],
-      user: {
-        id: id,
-        username: username
+    def payload(id, username)
+      {
+        exp: (Time.now + 1.day).to_i, # Expiration date 24 hours from now
+        iat: Time.now.to_i,
+        iss: ENV['JWT_ISSUER'],
+        user: {
+          id: id,
+          username: username
+        }
       }
-    }
-  end
+    end
 
   def user_params
     params.required(:user).permit(:username, :password, :email)

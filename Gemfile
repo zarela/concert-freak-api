@@ -16,6 +16,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jwt'
 gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
+gem 'httparty'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
