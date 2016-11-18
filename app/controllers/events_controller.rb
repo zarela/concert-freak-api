@@ -6,11 +6,12 @@ class EventsController < ApplicationController
   end
 
   def index
-    data = HTTParty.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=A3xk5YLy7A8prLuAuEW5cMALOkpbEzPe')
-    render json: data
+    # data = HTTParty.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=A3xk5YLy7A8prLuAuEW5cMALOkpbEzPe')
+    # render json: data
 
     events = @user.events
     render json: {status: 200, events: events}
+
     # events = Event.all
     # render json: events
   end
