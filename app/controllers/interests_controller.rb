@@ -22,7 +22,7 @@ class InterestsController < ApplicationController
     puts(interest_params)
 
     if interest.save
-      render json: interest, status: :created
+      render json: interest, status: :created, rsvp: interest
     else
       render json: interest.errors, status: :unprocessable_entity
     end

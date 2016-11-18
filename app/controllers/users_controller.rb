@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     render json: users
   end
 
-  def set_profile
+  # def set_profile
+  def set_users
     @user = User.find(params[:id])
   end
 

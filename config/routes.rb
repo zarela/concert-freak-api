@@ -3,21 +3,27 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :index, :show, :update, :destroy] do
 
-    resources :interests, only: [:create, :index, :show, :update, :destroy]
-    resources :events, only: [:create, :index, :show, :destroy]
-
+    # resources :interests, only: [:create, :index, :show, :update, :destroy]
     # resources :venues, only: [:index, :show] #This might comeback
-
-    # get '/get_all', to: 'interests#get_all'
-    # get 'events/index'
+    resources :events, only: [:create, :index, :show, :destroy] do
+    end
 
     collection do
       post '/login', to: 'users#login'
-      # get '/allevents', 'http://api.bandsintown.com/artists/Skrillex/events.json?api_version=2.0&app_id=' + process.ENV.appId
     end
   end
 
-
-
-
 end
+
+# Prefix Verb   URI Pattern                          Controller#Action
+# user_events GET    /users/:user_id/events(.:format)     events#index
+#        POST   /users/:user_id/events(.:format)     events#create
+# user_event GET    /users/:user_id/events/:id(.:format) events#show
+#        DELETE /users/:user_id/events/:id(.:format) events#destroy
+# login_users POST   /users/login(.:format)               users#login
+#  users GET    /users(.:format)                     users#index
+#        POST   /users(.:format)                     users#create
+#   user GET    /users/:id(.:format)                 users#show
+#        PATCH  /users/:id(.:format)                 users#update
+#        PUT    /users/:id(.:format)                 users#update
+#        DELETE /users/:id(.:format)                 users#destroy
