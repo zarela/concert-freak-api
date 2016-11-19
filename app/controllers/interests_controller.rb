@@ -1,14 +1,21 @@
 class InterestsController < ApplicationController
+  # before_action :authenticate
+
+  def set_users
+    @user = User.find(params[:user_id])
+  end
+
   def get_all
     users = User.all
     interests = Interest.all
     events = Event.all
-    all_data = {events: events, users: users, interests: interests}
+    venue = Venue.all
+    all_data = {events: events, users: users, interests: interests, venues: venues}
     render json: all_data
   end
 
   def index
-    interests = Interest.all
+    interests = User.find(params[:user_id]).interests
     render json: interests
   end
 
@@ -19,10 +26,11 @@ class InterestsController < ApplicationController
 
   def create
     interest = Interest.new(interest_params)
-    puts(interest_params)
+    # interest.user_id = @user.id
 
     if interest.save
-      render json: interest, status: :created, rsvp: interest
+
+      render json: {status: 200, message: 'Interested in this event'}
     else
       render json: interest.errors, status: :unprocessable_entity
     end
