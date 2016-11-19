@@ -26,7 +26,7 @@ gem 'rack-cors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug', platform: :mri
-  gem 'faker'
+  gem 'faker', '~> 1.6.6'
   gem 'pry-rails'
 end
 

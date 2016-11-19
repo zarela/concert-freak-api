@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
     # resources :interests, only: [:create, :index, :show, :update, :destroy]
     # resources :venues, only: [:index, :show] #This might comeback
+    resources :venues, only: [:index, :show]
     resources :events, only: [:create, :index, :show, :destroy] do
     end
 
