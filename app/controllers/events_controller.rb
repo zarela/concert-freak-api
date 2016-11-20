@@ -5,6 +5,10 @@ class EventsController < ApplicationController
   #   @user = User.find(params[:user_id])
   # end
 
+  # def set_events
+  #   @event = Event.find(params[:id])
+  # end
+
   def get_all
     events = Event.all
     venue = Venue.all
@@ -29,14 +33,28 @@ class EventsController < ApplicationController
   end
 
   def show
+    render json: Event.find(params[:id])
+  end
+
+  def update
     event = Event.find(params[:id])
-    render json :event
+    if event.update(event_params)
+      render json: event
+    else
+      render json: event.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    event = Event.find(params[:id])
+    event.destroy
+    render json: {status: 204, message: 'Deleted Event'}
   end
 
   private
 
     def event_params
-      params.require(:event).permit(:artist, :date, :price, :url, :location)
+      params.required(:event).permit(:artist, :date, :price, :url, :location)
     end
 
 end
