@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.date :date
       t.integer :price
       t.string :url
+      t.string :location
 
       t.timestamps
     end
