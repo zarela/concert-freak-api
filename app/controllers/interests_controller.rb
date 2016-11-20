@@ -1,10 +1,6 @@
 class InterestsController < ApplicationController
   # before_action :authenticate
 
-  def set_users
-    @user = User.find(params[:user_id])
-  end
-
   def get_all
     users = User.all
     interests = Interest.all
@@ -26,7 +22,6 @@ class InterestsController < ApplicationController
 
   def create
     interest = Interest.new(interest_params)
-    # interest.user_id = @user.id
 
     if interest.save
 
