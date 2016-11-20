@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :interests, dependent: :destroy
-  has_many :events, through: :interests
+  has_many :rsvps, dependent: :destroy
+  has_many :events, through: :rsvp
 
   validates :username, presence: true, uniqueness: true
   has_secure_password

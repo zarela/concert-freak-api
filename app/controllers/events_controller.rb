@@ -14,9 +14,6 @@ class EventsController < ApplicationController
   end
 
   def index
-    # data = HTTParty.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=A3xk5YLy7A8prLuAuEW5cMALOkpbEzPe')
-    # render json: data
-
     events = Event.all
     render json: events
   end
@@ -24,26 +21,16 @@ class EventsController < ApplicationController
   def create
     event = Event.new(event_params)
     # event.user_id = @user.id
-    # puts(event_params)
     if event.save
       render json: {status: 200, message: 'Created a new event'}
     else
       render json: {status: 422, event: event, errors: event.errors }
-      # render json: event.errors, status :unprocessable_entity
     end
   end
 
   def show
-
-    # This works
     event = Event.find(params[:id])
     render json :event
-
-    # event = Event.includes(:venue).find(params[:id])
-    # venue = event.venue
-
-    # render json: {status: 200, event: event, venue: venue}
-
   end
 
   private

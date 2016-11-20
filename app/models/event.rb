@@ -1,6 +1,4 @@
 class Event < ApplicationRecord
-  has_many :interests
-  has_many :users, through: :interests
-
-  # belongs_to :venue
+  has_many :rsvps
+  has_many :users, through: :rsvps
 end
