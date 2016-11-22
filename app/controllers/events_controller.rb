@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  # before_action :set_users, only: [:create]
+ # before_action :authenticate
   #
   # def set_users
   #   @user = User.find(params[:user_id])

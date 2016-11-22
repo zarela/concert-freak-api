@@ -21,7 +21,7 @@ class RsvpsController < ApplicationController
 
     def create
       # rsvp = Rsvp.new(rsvp_params)
-      rsvp = User.find(params[:user_id]).rsvp.create(rsvp_params)
+      rsvp = User.find(params[:user_id]).rsvps.create(rsvp_params)
       render json: {status: 201, data: rsvp}
 
       # if rsvp.save

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     collection do
       post '/login', to: 'users#login'
+      get '/current-user', to: 'user#current'
     end
   end
 end

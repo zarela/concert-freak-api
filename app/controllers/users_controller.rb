@@ -1,10 +1,20 @@
 class UsersController < ApplicationController
-  # before_action :authenticate, except: [:login, :create]
+  before_action :authenticate, except: [:login, :create]
   # before_action :set_profile
 
   def index
     users = User.all
     render json: users
+  end
+
+  def current
+    user = current_user
+    user = User.find(user[0]['user']['id'])
+    if user
+      render json: {status: 200, user: user}
+    else
+      render json: {status: 422, message: "User is not logged in"}
+    end
   end
 
   # def set_profile
