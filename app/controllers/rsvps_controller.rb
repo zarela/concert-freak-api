@@ -20,15 +20,12 @@ class RsvpsController < ApplicationController
     end
 
     def create
-      # rsvp = Rsvp.new(rsvp_params)
       rsvp = User.find(params[:user_id]).rsvps.create(rsvp_params)
       render json: {status: 201, data: rsvp}
 
-      # if rsvp.save
-      #   render json: {status: 200, message: 'You just RSVP for this Event'}
-      # else
-      #   render json: rsvp.errors, status: :unprocessable_entity
-      # end
+      # rsvp = User.find_by(user_id: rsvp_params[:user_id])
+      # user = Rsvp.new(user_params)
+
     end
 
     def destroy
